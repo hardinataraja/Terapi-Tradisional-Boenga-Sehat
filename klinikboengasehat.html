@@ -1,0 +1,1887 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boenga Sehat | Klinik Pengobatan Tradisional Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gold: #D4AF37;
+            --light-gold: #F4E8C1;
+            --dark-gold: #B8941F;
+            --deep-green: #1B4D3E;
+            --forest-green: #2D6A4F;
+            --emerald: #40916C;
+            --dark-bg: #0F1419;
+            --darker-bg: #0A0E12;
+            --card-bg: #161B22;
+            --text-primary: #F0F6FC;
+            --text-secondary: #8B949E;
+            --text-muted: #6E7681;
+            --border-color: #30363D;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--darker-bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-gold);
+            border-radius: 4px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 20, 25, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            z-index: 1001;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-bg);
+            font-size: 1.25rem;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 0.5px;
+        }
+
+        .logo-text span {
+            color: var(--primary-gold);
+        }
+
+        /* Desktop Navigation */
+        .nav-menu {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.9rem;
+            position: relative;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--primary-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            color: var(--dark-bg);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: var(--text-primary);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(15, 20, 25, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 500;
+            font-family: 'Playfair Display', serif;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--primary-gold);
+        }
+
+        .mobile-menu .nav-cta {
+            margin-top: 1rem;
+            font-size: 1rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 50%, var(--deep-green) 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 6s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            animation: slideInLeft 1s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--primary-gold);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .hero h1 span {
+            color: var(--primary-gold);
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: rgba(212, 175, 55, 0.2);
+            z-index: -1;
+            border-radius: 4px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 2.5rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--primary-gold);
+            display: block;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            color: var(--dark-bg);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-gold);
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            position: relative;
+            animation: slideInRight 1s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .hero-image-main {
+            width: 100%;
+            max-width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(27, 77, 62, 0.3));
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: morphing 10s ease-in-out infinite;
+        }
+
+        @keyframes morphing {
+            0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            25% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; }
+            50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
+            75% { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; }
+        }
+
+        .hero-icon {
+            font-size: 8rem;
+            color: var(--primary-gold);
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+            opacity: 0.9;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: rgba(22, 27, 34, 0.9);
+            padding: 1rem 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            animation: floatCard 3s ease-in-out infinite;
+            backdrop-filter: blur(10px);
+        }
+
+        .floating-card.card-1 {
+            top: 10%;
+            left: -20px;
+            animation-delay: 0s;
+        }
+
+        .floating-card.card-2 {
+            bottom: 20%;
+            right: -30px;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating-card i {
+            font-size: 1.5rem;
+            color: var(--primary-gold);
+        }
+
+        .floating-card span {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 2rem;
+            background: var(--darker-bg);
+            position: relative;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--primary-gold);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .services-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 2.5rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--dark-gold));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            color: var(--primary-gold);
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .service-card:hover .service-icon {
+            transform: rotate(10deg) scale(1.1);
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            color: var(--dark-bg);
+        }
+
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .service-features {
+            margin-top: 1.5rem;
+            list-style: none;
+        }
+
+        .service-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .service-features li i {
+            color: var(--primary-gold);
+            font-size: 0.8rem;
+        }
+
+        /* Why Choose Us */
+        .why-us {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--deep-green) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .why-us::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                              radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
+        }
+
+        .why-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .why-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .why-content > p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .benefits-list {
+            list-style: none;
+        }
+
+        .benefit-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(22, 27, 34, 0.6);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+        }
+
+        .benefit-item:hover {
+            transform: translateX(10px);
+            background: rgba(22, 27, 34, 0.9);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+
+        .benefit-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-bg);
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .benefit-text h4 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .benefit-text p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .why-image {
+            position: relative;
+        }
+
+        .image-frame {
+            width: 100%;
+            height: 500px;
+            background: var(--card-bg);
+            border-radius: 30px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .image-frame::before {
+            content: '';
+            position: absolute;
+            inset: 20px;
+            border: 1px dashed rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            pointer-events: none;
+        }
+
+        .clinic-visual {
+            font-size: 10rem;
+            color: var(--primary-gold);
+            opacity: 0.3;
+        }
+
+        .experience-badge {
+            position: absolute;
+            bottom: 30px;
+            left: -30px;
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            color: var(--dark-bg);
+            padding: 1.5rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .experience-badge .years {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+            line-height: 1;
+        }
+
+        .experience-badge .text {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            font-weight: 600;
+        }
+
+        /* Booking Section */
+        .booking {
+            padding: 6rem 2rem;
+            background: var(--darker-bg);
+            position: relative;
+        }
+
+        .booking-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: 30px;
+            padding: 3rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .booking-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            color: var(--dark-bg);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 2rem;
+            background: var(--dark-bg);
+            position: relative;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .contact-info > p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .contact-cards {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .contact-card i {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
+            color: var(--primary-gold);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .contact-card h4 {
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+        }
+
+        .contact-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .contact-card a {
+            color: var(--primary-gold);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .contact-card a:hover {
+            color: var(--light-gold);
+        }
+
+        .map-container {
+            background: var(--card-bg);
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            height: 100%;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .map-placeholder {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .map-placeholder i {
+            font-size: 4rem;
+            color: var(--primary-gold);
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .map-placeholder h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .map-placeholder p {
+            color: var(--text-secondary);
+        }
+
+        .directions-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--primary-gold);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .directions-btn:hover {
+            background: var(--primary-gold);
+            color: var(--dark-bg);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--darker-bg);
+            color: var(--text-primary);
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .footer-brand h3 span {
+            color: var(--primary-gold);
+        }
+
+        .footer-brand p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .social-links a:hover {
+            background: var(--primary-gold);
+            color: var(--dark-bg);
+            transform: translateY(-3px);
+            border-color: var(--primary-gold);
+        }
+
+        .footer-column h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-gold);
+            font-weight: 600;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-column a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-column a:hover {
+            color: var(--primary-gold);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            transition: all 0.3s ease;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .nav-cta {
+                display: none;
+            }
+
+            .hero-container,
+            .why-container,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-stats {
+                gap: 2rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .experience-badge {
+                left: 20px;
+                bottom: 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .booking-container {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero {
+                padding: 7rem 1.5rem 3rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-stats {
+                flex-wrap: wrap;
+                gap: 1.5rem;
+                padding: 1rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .floating-card {
+                display: none;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .why-image {
+                order: -1;
+            }
+
+            .image-frame {
+                height: 300px;
+            }
+
+            .experience-badge {
+                left: 10px;
+                bottom: 10px;
+                padding: 1rem 1.5rem;
+            }
+
+            .experience-badge .years {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .booking-container {
+                padding: 1.5rem;
+                border-radius: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <span class="logo-text">Boenga <span>Sehat</span></span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#beranda">Beranda</a></li>
+                <li><a href="#layanan">Layanan</a></li>
+                <li><a href="#tentang">Tentang Kami</a></li>
+                <li><a href="#booking">Booking</a></li>
+                <li><a href="#kontak">Kontak</a></li>
+            </ul>
+
+            <a href="https://wa.me/6285855161665" class="nav-cta" target="_blank">
+                <i class="fas fa-phone-alt"></i> Hubungi Kami
+            </a>
+
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#beranda" onclick="toggleMenu()">Beranda</a>
+        <a href="#layanan" onclick="toggleMenu()">Layanan</a>
+        <a href="#tentang" onclick="toggleMenu()">Tentang Kami</a>
+        <a href="#booking" onclick="toggleMenu()">Booking</a>
+        <a href="#kontak" onclick="toggleMenu()">Kontak</a>
+        <a href="https://wa.me/6285855161665" class="nav-cta" target="_blank" onclick="toggleMenu()">
+            <i class="fas fa-phone-alt"></i> Hubungi Kami
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="beranda">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-crown"></i>
+                    <span>Terpercaya Sejak 2018</span>
+                </div>
+                <h1>
+                    Klinik Pengobatan Tradisional <span>Boenga Sehat</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Solusi alami untuk kesehatan pria. Kami menyediakan terapi holistik dengan ramuan herbal premium untuk mengembalikan kepercayaan diri dan vitalitas Anda.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">7+</span>
+                        <span class="stat-label">Tahun Pengalaman</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">3000+</span>
+                        <span class="stat-label">Pasien Terbantu</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Herbal Alami</span>
+                    </div>
+                </div>
+                <div class="hero-buttons">
+                    <a href="#layanan" class="btn-primary">
+                        Lihat Layanan <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#booking" class="btn-secondary">
+                        <i class="fas fa-calendar-alt"></i> Booking Sekarang
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-main">
+                    <i class="fas fa-spa hero-icon"></i>
+                </div>
+                <div class="floating-card card-1">
+                    <i class="fas fa-gem"></i>
+                    <span>Layanan Premium</span>
+                </div>
+                <div class="floating-card card-2">
+                    <i class="fas fa-user-shield"></i>
+                    <span>Privasi Terjaga</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="layanan">
+        <div class="section-header reveal">
+            <span class="section-tag">Layanan Eksklusif</span>
+            <h2 class="section-title">Terapi Tradisional Premium</h2>
+            <p class="section-subtitle">
+                Kami menawarkan berbagai terapi tradisional yang telah terbukti efektif mengatasi masalah kesehatan pria dengan pendekatan alami dan tanpa efek samping.
+            </p>
+        </div>
+        
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <div class="service-icon">
+                    <i class="fas fa-male"></i>
+                </div>
+                <h3>Pembesaran Organ Vital</h3>
+                <p>Terapi eksklusif untuk meningkatkan ukuran dan performa organ vital pria menggunakan teknik pijat khusus dan ramuan herbal premium.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Teknik pijat tradisional</li>
+                    <li><i class="fas fa-check"></i> Ramuan herbal eksklusif</li>
+                    <li><i class="fas fa-check"></i> Hasil permanen</li>
+                </ul>
+            </div>
+
+            <div class="service-card reveal">
+                <div class="service-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3>Terapi Ejakulasi Dini</h3>
+                <p>Program terapi komprehensif untuk mengatasi ejakulasi dini dengan kombinasi konseling, teknik pernapasan, dan pengobatan herbal.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Konseling profesional</li>
+                    <li><i class="fas fa-check"></i> Teknik kontrol napas</li>
+                    <li><i class="fas fa-check"></i> Stamina training</li>
+                </ul>
+            </div>
+
+            <div class="service-card reveal">
+                <div class="service-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <h3>Terapi Impotensi</h3>
+                <p>Pengobatan tradisional untuk mengatasi impotensi dan meningkatkan fungsi ereksi dengan ramuan herbal pilihan dan terapi akupresur.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Akupresur tradisional</li>
+                    <li><i class="fas fa-check"></i> Herbal vitalitas</li>
+                    <li><i class="fas fa-check"></i> Diet khusus</li>
+                </ul>
+            </div>
+
+            <div class="service-card reveal">
+                <div class="service-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Terapi Disfungsi Ereksi</h3>
+                <p>Solusi alami untuk mengatasi disfungsi ereksi dengan pendekatan holistik yang memperbaiki sirkulasi darah dan kesehatan secara menyeluruh.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Perbaikan sirkulasi</li>
+                    <li><i class="fas fa-check"></i> Detoksifikasi</li>
+                    <li><i class="fas fa-check"></i> Penguatan otot</li>
+                </ul>
+            </div>
+
+            <div class="service-card reveal">
+                <div class="service-icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <h3>Konsultasi Kesehatan Pria</h3>
+                <p>Layanan konsultasi privat dengan praktisi berpengalaman untuk membahas masalah kesehatan pria dan mendapatkan solusi yang tepat.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> 100% Confidential</li>
+                    <li><i class="fas fa-check"></i> Praktisi berpengalaman</li>
+                    <li><i class="fas fa-check"></i> Solusi personal</li>
+                </ul>
+            </div>
+
+            <div class="service-card reveal">
+                <div class="service-icon">
+                    <i class="fas fa-mortar-pestle"></i>
+                </div>
+                <h3>Paket Herbal Eksklusif</h3>
+                <p>Ramuan herbal tradisional racikan khusus yang dibuat dari bahan-bahan alami pilihan untuk mendukung kesehatan dan vitalitas pria.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Bahan organik</li>
+                    <li><i class="fas fa-check"></i> Racikan tradisional</li>
+                    <li><i class="fas fa-check"></i> Tanpa kimia</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-us" id="tentang">
+        <div class="why-container">
+            <div class="why-content reveal">
+                <h2>Mengapa Memilih Boenga Sehat?</h2>
+                <p>Kami menggabungkan kearifan lokal dengan pendekatan modern untuk memberikan pengobatan yang efektif, aman, dan nyaman bagi setiap pasien.</p>
+                
+                <ul class="benefits-list">
+                    <li class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div class="benefit-text">
+                            <h4>100% Bahan Alami</h4>
+                            <p>Hanya menggunakan herbal dan bahan organik pilihan tanpa campuran bahan kimia berbahaya.</p>
+                        </div>
+                    </li>
+                    <li class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <div class="benefit-text">
+                            <h4>Praktisi Berpengalaman</h4>
+                            <p>Tim terapis kami memiliki pengalaman lebih dari 14 tahun dalam pengobatan tradisional.</p>
+                        </div>
+                    </li>
+                    <li class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <div class="benefit-text">
+                            <h4>Privasi Terjamin</h4>
+                            <p>Sistem booking dan konsultasi privat yang menjamin kerahasiaan data dan identitas pasien.</p>
+                        </div>
+                    </li>
+                    <li class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <div class="benefit-text">
+                            <h4>Berizin Resmi</h4>
+                            <p>Klinik tersertifikasi dan berizin resmi dari Dinas Kesehatan Mojokerto.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="why-image reveal">
+                <div class="image-frame">
+                    <i class="fas fa-clinic-medical clinic-visual"></i>
+                    <div class="experience-badge">
+                        <span class="years">7+</span>
+                        <span class="text">Tahun<br>Pengalaman</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section class="booking" id="booking">
+        <div class="section-header reveal">
+            <span class="section-tag">Reservasi</span>
+            <h2 class="section-title">Booking Online</h2>
+            <p class="section-subtitle">
+                Isi formulir di bawah ini untuk membuat janji temu. Kami akan mengirimkan konfirmasi melalui WhatsApp.
+            </p>
+        </div>
+
+        <div class="booking-container reveal">
+            <form class="booking-form" id="bookingForm" onsubmit="handleBooking(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nama">Nama Lengkap</label>
+                        <input type="text" id="nama" name="nama" required placeholder="Masukkan nama lengkap">
+                    </div>
+                    <div class="form-group">
+                        <label for="telepon">Nomor WhatsApp</label>
+                        <input type="tel" id="telepon" name="telepon" required placeholder="Contoh: 08123456789">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="layanan">Pilih Layanan</label>
+                        <select id="layanan" name="layanan" required>
+                            <option value="">Pilih layanan...</option>
+                            <option value="Pembesaran Organ Vital">Pembesaran Organ Vital</option>
+                            <option value="Terapi Ejakulasi Dini">Terapi Ejakulasi Dini</option>
+                            <option value="Terapi Impotensi">Terapi Impotensi</option>
+                            <option value="Terapi Disfungsi Ereksi">Terapi Disfungsi Ereksi</option>
+                            <option value="Konsultasi Kesehatan Pria">Konsultasi Kesehatan Pria</option>
+                            <option value="Paket Herbal Eksklusif">Paket Herbal Eksklusif</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="tanggal">Tanggal Kunjungan</label>
+                        <input type="date" id="tanggal" name="tanggal" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="waktu">Waktu Kunjungan</label>
+                    <select id="waktu" name="waktu" required>
+                        <option value="">Pilih waktu...</option>
+                        <option value="09:00">09:00 WIB</option>
+                        <option value="10:00">10:00 WIB</option>
+                        <option value="11:00">11:00 WIB</option>
+                        <option value="13:00">13:00 WIB</option>
+                        <option value="14:00">14:00 WIB</option>
+                        <option value="15:00">15:00 WIB</option>
+                        <option value="16:00">16:00 WIB</option>
+                        <option value="17:00">17:00 WIB</option>
+                        <option value="18:00">18:00 WIB</option>
+                        <option value="19:00">19:00 WIB</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="keluhan">Keluhan atau Catatan Tambahan</label>
+                    <textarea id="keluhan" name="keluhan" placeholder="Ceritakan keluhan Anda atau catatan khusus lainnya..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fab fa-whatsapp"></i> Booking via WhatsApp
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="kontak">
+        <div class="section-header reveal">
+            <span class="section-tag">Kontak Kami</span>
+            <h2 class="section-title">Lokasi & Informasi</h2>
+            <p class="section-subtitle">
+                Kunjungi klinik kami atau hubungi kami melalui WhatsApp untuk konsultasi gratis.
+            </p>
+        </div>
+
+        <div class="contact-container">
+            <div class="contact-info reveal">
+                <h2>Klinik Boenga Sehat</h2>
+                <p>Kami siap membantu Anda mengatasi masalah kesehatan pria dengan pendekatan tradisional yang aman dan efektif.</p>
+                
+                <div class="contact-cards">
+                    <div class="contact-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Alamat Klinik</h4>
+                            <p>Jalan Imam Bonjol GG 2 No. 3<br>Mojosari, Mojokerto, Jawa Timur</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <i class="fab fa-whatsapp"></i>
+                        <div>
+                            <h4>WhatsApp / Telepon</h4>
+                            <p><a href="https://wa.me/6285855161665" target="_blank">0858-5516-1665</a><br>Senin - Sabtu: 09.00 - 20.00 WIB</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p><a href="mailto:boengasehat@gmail.com">boengasehat@gmail.com</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <i class="fas fa-calendar-check"></i>
+                        <div>
+                            <h4>Jam Operasional</h4>
+                            <p>Senin - Sabtu: 09.00 - 20.00 WIB<br>Minggu: Tutup</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="map-container reveal">
+                <div class="map-placeholder">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h3>Lokasi Klinik</h3>
+                    <p>Jalan Imam Bonjol GG 2 No. 3<br>Mojosari, Mojokerto</p>
+                    <a href="https://maps.google.com/?q=Jalan+Imam+Bonjol+GG+2+No.+3+Mojosari+Mojokerto" class="directions-btn" target="_blank">
+                        <i class="fas fa-directions"></i> Buka di Google Maps
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3><i class="fas fa-leaf"></i> Boenga <span>Sehat</span></h3>
+                    <p>Klinik pengobatan tradisional premium di Mojokerto yang menyediakan solusi alami untuk kesehatan pria dengan pendekatan herbal dan terapi tradisional.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/6285855161665"><i class="fab fa-whatsapp"></i></a>
+                        <a href="mailto:boengasehat@gmail.com"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Layanan</h4>
+                    <ul>
+                        <li><a href="#layanan"><i class="fas fa-chevron-right"></i> Pembesaran Organ</a></li>
+                        <li><a href="#layanan"><i class="fas fa-chevron-right"></i> Ejakulasi Dini</a></li>
+                        <li><a href="#layanan"><i class="fas fa-chevron-right"></i> Terapi Impotensi</a></li>
+                        <li><a href="#layanan"><i class="fas fa-chevron-right"></i> Disfungsi Ereksi</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Informasi</h4>
+                    <ul>
+                        <li><a href="#tentang"><i class="fas fa-chevron-right"></i> Tentang Kami</a></li>
+                        <li><a href="#booking"><i class="fas fa-chevron-right"></i> Cara Booking</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Testimoni</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Kontak</h4>
+                    <ul>
+                        <li><a href="https://wa.me/6285855161665"><i class="fas fa-phone"></i> 0858-5516-1665</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker"></i> Mojosari, Mojokerto</a></li>
+                        <li><a href="#"><i class="fas fa-clock"></i> Senin-Sabtu: 09.00-20.00</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Boenga Sehat Traditional Clinic. All rights reserved. | Praktek pengobatan tradisional dengan izin resmi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/6285855161665" class="whatsapp-float" target="_blank" title="Chat WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const hamburger = document.querySelector('.hamburger');
+            const mobileMenu = document.getElementById('mobileMenu');
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                toggleMenu();
+            });
+        });
+
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            const elementVisible = 100;
+
+            revealElements.forEach((reveal) => {
+                const elementTop = reveal.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Trigger once on load
+
+        // Navbar Background on Scroll
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(15, 20, 25, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
+            } else {
+                navbar.style.background = 'rgba(15, 20, 25, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        // Smooth Scroll for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // WhatsApp Booking Form Handler
+        function handleBooking(e) {
+            e.preventDefault();
+            
+            const formData = {
+                nama: document.getElementById('nama').value,
+                telepon: document.getElementById('telepon').value,
+                layanan: document.getElementById('layanan').value,
+                tanggal: document.getElementById('tanggal').value,
+                waktu: document.getElementById('waktu').value,
+                keluhan: document.getElementById('keluhan').value
+            };
+
+            // Format date to Indonesian
+            const dateObj = new Date(formData.tanggal);
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const tanggalFormatted = dateObj.toLocaleDateString('id-ID', options);
+
+            // Create WhatsApp message
+            const message = `*Booking Klinik Boenga Sehat*%0A%0A` +
+                `*Nama:* ${formData.nama}%0A` +
+                `*No. WhatsApp:* ${formData.telepon}%0A` +
+                `*Layanan:* ${formData.layanan}%0A` +
+                `*Tanggal:* ${tanggalFormatted}%0A` +
+                `*Waktu:* ${formData.waktu} WIB%0A` +
+                `*Keluhan/Catatan:* ${formData.keluhan || '-'}%0A%0A` +
+                `Saya ingin membuat janji temu untuk layanan tersebut. Terima kasih.`;
+
+            // Open WhatsApp with formatted message
+            const whatsappURL = `https://wa.me/6285855161665?text=${message}`;
+            window.open(whatsappURL, '_blank');
+        }
+
+        // Set minimum date to today
+        const dateInput = document.getElementById('tanggal');
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+
+        // Counter Animation for Stats
+        const animateValue = (obj, start, end, duration) => {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        };
+
+        // Trigger counter animation when hero is visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = entry.target.querySelectorAll('.stat-number');
+                    statNumbers.forEach(stat => {
+                        const finalValue = parseInt(stat.innerText);
+                        if (!stat.classList.contains('counted')) {
+                            animateValue(stat, 0, finalValue, 2000);
+                            stat.classList.add('counted');
+                        }
+                    });
+                }
+            });
+        });
+
+        const heroStats = document.querySelector('.hero-stats');
+        if (heroStats) {
+            statsObserver.observe(heroStats);
+        }
+    </script>
+</body>
+</html>
